@@ -3,8 +3,8 @@
 .idea
 
 # dependencies
-/React/node_modules
-/Node/node_modules
+./React/node_modules
+./Node/node_modules
 
 # testing
 /coverage
@@ -43,3 +43,5 @@ yarn-error.log*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/Node/node_modules/
+/React/node_modules/

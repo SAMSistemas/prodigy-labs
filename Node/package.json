@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "babel-node": "^6.5.3",
+    "babel-preset-es2015": "^6.24.1"
+  },
+  "scripts": {
+    "start": "babel-node server.js"
+  },
+  "name": "server-test",
+  "version": "1.0.0",
+  "description": "Test server for presentation",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC"
+}
