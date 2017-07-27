@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import cors from 'cors';
 
 import mock, { dataWrap } from './mock_data';
 
@@ -12,9 +13,10 @@ const app = express();
 /* Indico a express que use el middleware morgan,
 este middleware se encarga de loggear cada request que llega al server */
 app.use(morgan());
+app.use(cors());
 
 /* Indico que express usa el middleware bodyParser para procesar el body del request */
-app.use(bodyParser());
+app.use(bodyParser.json());
 
 app.get("/team", (request, response) => response.json(dataWrap(team)));
 

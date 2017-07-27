@@ -1,4 +1,4 @@
-const createUser = (name, lastname, phone, birth) => ({name, lastname, phone, birth});
+const createUser = (name, lastName, phone, birth) => ({name, lastName, phone, birth});
 export const dataWrap = data => ({data});
 
 export default {
