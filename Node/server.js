@@ -46,7 +46,7 @@ app.put("/team/:id", (request, response) => {
     }
 
     team[id] = body;
-    response.status(202).json(dataWrap({ok: true}));
+    response.status(200).json(dataWrap({ok: true}));
 });
 
 app.delete("/team/:id", (request, response) => {
