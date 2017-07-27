@@ -3,7 +3,7 @@ import { Snackbar } from 'material-ui';
 
 import MemberForm from './MemberForm';
 
-class AddMember extends Component {
+class EditMember extends Component {
 
     state = {
         showSnackbar: false,
@@ -49,6 +49,7 @@ class AddMember extends Component {
         event.preventDefault();
 
         const { name, lastName, birth } = this.form;
+        const { editIndex, onComplete } = this.props;
 
         const formData = {
             name: name.value,
@@ -57,8 +58,8 @@ class AddMember extends Component {
         };
 
         if(this.validate(formData)) {
-            fetch("http://localhost:9001/team", {
-                method: "POST",
+            fetch(`http://localhost:9001/team/${editIndex}`, {
+                method: "PUT",
                 mode: "cors",
                 headers: {
                     "Content-Type": "application/json"
@@ -68,8 +69,9 @@ class AddMember extends Component {
                 .then(response => response.json())
                 .then(({data}) => {
                     if(data.ok) {
-                        this.showSnackbar("Creado correctamente.");
+                        this.showSnackbar("Modificado correctamente.");
                         this.form.reset();
+                        onComplete();
                     }
                     else
                         this.showSnackbar("He ocurrido un error.");
@@ -92,4 +94,4 @@ class AddMember extends Component {
 }
 
 
-export default AddMember;
+export default EditMember;

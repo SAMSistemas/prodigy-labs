@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Snackbar, CircularProgress } from 'material-ui';
 import TeamTable from "./TeamTable";
+import EditDialog from "./EditDialog";
 
 class TeamMembers extends React.Component {
     state = {
@@ -9,7 +10,9 @@ class TeamMembers extends React.Component {
         message: "",
         error: false,
         showSnackbar: false,
-        isFetching: true
+        showEditDialog: false,
+        isFetching: true,
+        currentEdit: null
     };
 
 
@@ -69,17 +72,33 @@ class TeamMembers extends React.Component {
         .catch(err => this.setError(err))
     };
 
+    showEditDialog = (index) => {
+        this.setState({
+            showEditDialog: true,
+            currentEdit: index
+        })
+    };
+
+    onEditDialogClose = () => {
+        this.setState({
+            showEditDialog: false,
+            currentEdit: null
+        })
+        this.getTeamFromServer();
+    };
+
     componentDidMount(){
         this.getTeamFromServer()
     }
 
     render() {
-        const { showSnackbar, error, message, team, isFetching } = this.state;
+        const { showSnackbar, showEditDialog, error, message, team, isFetching, currentEdit } = this.state;
 
         return (
             <div>
                 {isFetching && <CircularProgress />}
-                {!isFetching && !error && <TeamTable team={team} onMemberDelete={this.onMemberDelete} />}
+                {!isFetching && !error && <TeamTable team={team} onMemberEdit={this.showEditDialog} onMemberDelete={this.onMemberDelete} />}
+                <EditDialog open={showEditDialog} editIndex={currentEdit} handleClose={this.onEditDialogClose} />
                 <Snackbar open={showSnackbar} message={message} autoHideDuration={2000} onRequestClose={this.hideSnackbar} />
             </div>
         );

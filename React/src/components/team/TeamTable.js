@@ -9,19 +9,21 @@ import {
 
 import TeamRow from './TeamRow';
 
-const TeamTable = ({team, onMemberDelete}) => (
+const TeamTable = ({team, onMemberEdit, onMemberDelete}) => (
     <Table>
         <TableHeader displaySelectAll={false}>
             <TableRow>
-                <TableHeaderColumn>Position</TableHeaderColumn>
-                <TableHeaderColumn>Name</TableHeaderColumn>
-                <TableHeaderColumn>Last Name</TableHeaderColumn>
-                <TableHeaderColumn>Delete</TableHeaderColumn>
+                <TableHeaderColumn>Posición</TableHeaderColumn>
+                <TableHeaderColumn>Nombre</TableHeaderColumn>
+                <TableHeaderColumn>Apellido</TableHeaderColumn>
+                <TableHeaderColumn>Fecha de nacimiento</TableHeaderColumn>
+                <TableHeaderColumn>Editar</TableHeaderColumn>
+                <TableHeaderColumn>Borrar</TableHeaderColumn>
             </TableRow>
         </TableHeader>
         <TableBody>
             {team.map((teamMember, index) => (
-                <TeamRow key={index} position={index} teamMember={teamMember} onDelete={onMemberDelete} />
+                <TeamRow key={index} position={index} teamMember={teamMember} onEdit={onMemberEdit} onDelete={onMemberDelete} />
             ))}
         </TableBody>
     </Table>

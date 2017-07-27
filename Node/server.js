@@ -38,6 +38,17 @@ app.get("/team/:id", (request, response) => {
     response.json(dataWrap(team[id]));
 });
 
+app.put("/team/:id", (request, response) => {
+    const { params: { id }, body } = request;
+
+    if(!team.hasOwnProperty(id)) {
+        return response.status(400).json({error: "Ese miembro no existe!!"});
+    }
+
+    team[id] = body;
+    response.status(202).json(dataWrap({ok: true}));
+});
+
 app.delete("/team/:id", (request, response) => {
     const { params: { id } } = request;
 
