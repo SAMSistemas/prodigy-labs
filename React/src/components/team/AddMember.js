@@ -14,17 +14,17 @@ class AddMember extends Component {
 
         if(!name) {
             this.showSnackbar("El nombre no puede estar vacio!")
-            this.refs.form.name.focus();
+            this.form.name.focus();
             return false;
         }
         else if(!lastName) {
             this.showSnackbar("El apellido no puede estar vacio!")
-            this.refs.form.lastName.focus();
+            this.form.lastName.focus();
             return false;
         }
         else if(!birth) {
             this.showSnackbar("La fecha de nacimiento no puede estar vacia!")
-            this.refs.form.birth.focus();
+            this.form.birth.focus();
             return false;
         }
         return true;
@@ -47,7 +47,7 @@ class AddMember extends Component {
     onSubmit = (event) => {
         event.preventDefault();
 
-        const { name, lastName, birth } = this.refs.form;
+        const { name, lastName, birth } = this.form;
 
         const formData = {
             name: name.value,
@@ -68,7 +68,7 @@ class AddMember extends Component {
                 .then(({data}) => {
                     if(data.ok) {
                         this.showSnackbar("Creado correctamente.");
-                        this.refs.form.reset();
+                        this.form.reset();
                     }
                     else
                         this.showSnackbar("He ocurrido un error.");
@@ -82,7 +82,7 @@ class AddMember extends Component {
         const { showSnackbar, message } = this.state;
         return (
             <div style={{display: "block", textAlign: "center", padding: "15%"}}>
-                <form ref="form" onSubmit={this.onSubmit}>
+                <form ref={form => this.form = form} onSubmit={this.onSubmit}>
                     <TextField name="name" hintText="Name" />
                     <br/>
                     <TextField name="lastName" hintText="Last Name" />
